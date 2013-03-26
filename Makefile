@@ -10,7 +10,7 @@ all: build test
 build: $(LIB)
 
 lib/%.js: src/%.coffee
-	mkdir -p $(@D)
+	mkdir -p "$(@D)"
 	$(COFFEE) <"$<" >"$@"
 
 .PHONY: release test loc clean
