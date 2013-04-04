@@ -15,7 +15,7 @@ egal = (a, b) ->
 # A recursive functional equivalence helper; uses egal for testing equivalence.
 arrayEgal = (a, b) ->
   if egal a, b then yes
-  else if a instanceof Array and b instanceof Array
+  else if (Array.isArray a) and Array.isArray b
     return no unless a.length is b.length
     return no for el, idx in a when not arrayEgal el, b[idx]
     yes
