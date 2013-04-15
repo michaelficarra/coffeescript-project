@@ -1,10 +1,15 @@
 default: build
 
-SRC = $(shell find src -name "*.coffee" -type f | sort)
-LIB = $(SRC:src/%.coffee=lib/%.js)
+BINDIR = bin
+SRCDIR = src
+LIBDIR = lib
+TESTDIR = test
+
+SRC = $(shell find "$(SRCDIR)" -name "*.coffee" -type f | sort)
+LIB = $(SRC:$(SRCDIR)/%.coffee=$(LIBDIR)/%.js)
 
 COFFEE=node_modules/.bin/coffee --js
-MOCHA=node_modules/.bin/mocha --compilers coffee:coffee-script-redux -u tdd
+MOCHA=node_modules/.bin/mocha --compilers coffee:coffee-script-redux -r coffee-script-redux -r test-setup.coffee -u tdd -R dot
 
 all: build test
 build: $(LIB)
@@ -13,7 +18,8 @@ lib/%.js: src/%.coffee
 	mkdir -p "$(@D)"
 	$(COFFEE) <"$<" >"$@"
 
-.PHONY: release test loc clean
+.PHONY: phony-dep release test loc clean
+phony-dep:
 
 VERSION = $(shell node -pe 'require("./package.json").version')
 release-patch: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "patch")')
@@ -37,7 +43,9 @@ release: build test
 	npm publish
 
 test:
-	$(MOCHA) -R dot test/*.coffee
+	$(MOCHA) "$(TESTDIR)"/*.coffee
+$(TESTDIR)/%.coffee: phony-dep
+	$(MOCHA) "$@"
 
 loc:
 	wc -l src/*
