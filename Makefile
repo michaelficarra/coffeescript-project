@@ -15,7 +15,7 @@ all: build test
 build: $(LIB)
 
 lib/%.js: src/%.coffee
-	mkdir -p "$(@D)"
+	@mkdir -p "$(@D)"
 	$(COFFEE) <"$<" >"$@"
 
 .PHONY: phony-dep release test loc clean
@@ -48,7 +48,7 @@ $(TESTDIR)/%.coffee: phony-dep
 	$(MOCHA) "$@"
 
 loc:
-	wc -l src/*
+	@wc -l src/*
 
 clean:
-	rm -rf lib
+	@rm -rf lib
