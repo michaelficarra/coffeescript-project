@@ -9,7 +9,7 @@ SRC = $(shell find "$(SRCDIR)" -name "*.coffee" -type f | sort)
 LIB = $(SRC:$(SRCDIR)/%.coffee=$(LIBDIR)/%.js)
 
 COFFEE=node_modules/.bin/coffee --js
-MOCHA=node_modules/.bin/mocha --compilers coffee:coffee-script-redux -r coffee-script-redux -r test-setup.coffee -u tdd -R dot
+MOCHA=node_modules/.bin/mocha --compilers coffee:coffee-script-redux/register -r coffee-script-redux/register -r test-setup.coffee -u tdd -R dot
 
 all: build test
 build: $(LIB)

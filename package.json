@@ -26,7 +26,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "coffee-script-redux": "git://github.com/michaelficarra/CoffeeScriptRedux.git#master",
+    "coffee-script-redux": "2.0.0-beta5",
     "mocha": "~1.8.1",
     "scopedfs": "~0.1.0",
     "semver": "~1.1.4"
