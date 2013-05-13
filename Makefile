@@ -10,13 +10,19 @@ LIB = $(SRC:$(SRCDIR)/%.coffee=$(LIBDIR)/%.js)
 
 COFFEE=node_modules/.bin/coffee --js
 MOCHA=node_modules/.bin/mocha --compilers coffee:coffee-script-redux/register -r coffee-script-redux/register -r test-setup.coffee -u tdd -R dot
+CJSIFY=node_modules/.bin/cjsify --minify
 
 all: build test
 build: $(LIB)
+bundle: dist/bundle.js
 
 lib/%.js: src/%.coffee
 	@mkdir -p "$(@D)"
 	$(COFFEE) <"$<" >"$@"
+
+dist/bundle.js: $(LIB)
+	@mkdir -p "$(@D)"
+	$(CJSIFY) -x ProjectName $(shell node -pe 'require("./package.json").main') >"$@"
 
 .PHONY: phony-dep release test loc clean
 phony-dep:
@@ -51,4 +57,4 @@ loc:
 	@wc -l src/*
 
 clean:
-	@rm -rf lib
+	@rm -rf lib dist
