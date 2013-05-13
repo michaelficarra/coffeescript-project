@@ -4,6 +4,7 @@ BINDIR = bin
 SRCDIR = src
 LIBDIR = lib
 TESTDIR = test
+DISTDIR = dist
 
 SRC = $(shell find "$(SRCDIR)" -name "*.coffee" -type f | sort)
 LIB = $(SRC:$(SRCDIR)/%.coffee=$(LIBDIR)/%.js)
@@ -14,13 +15,13 @@ CJSIFY=node_modules/.bin/cjsify --minify
 
 all: build test
 build: $(LIB)
-bundle: dist/bundle.js
+bundle: $(DISTDIR)/bundle.js
 
-lib/%.js: src/%.coffee
+$(LIBDIR)/%.js: $(SRCDIR)/%.coffee
 	@mkdir -p "$(@D)"
 	$(COFFEE) <"$<" >"$@"
 
-dist/bundle.js: $(LIB)
+$(DISTDIR)/bundle.js: $(LIB)
 	@mkdir -p "$(@D)"
 	$(CJSIFY) -x ProjectName $(shell node -pe 'require("./package.json").main') >"$@"
 
@@ -54,7 +55,7 @@ $(TESTDIR)/%.coffee: phony-dep
 	$(MOCHA) "$@"
 
 loc:
-	@wc -l src/*
+	@wc -l "$(SRCDIR)"/*
 
 clean:
-	@rm -rf lib dist
+	@rm -rf "$(LIBDIR)" "$(DISTDIR)"
