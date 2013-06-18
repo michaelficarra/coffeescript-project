@@ -24,7 +24,6 @@ global.inspect = (o) -> util.inspect o, no, 2, yes
 global.eq      = (a, b, msg) -> ok egal(a, b), msg ? "#{inspect a} === #{inspect b}"
 global.arrayEq = (a, b, msg) -> ok arrayEgal(a,b), msg ? "#{inspect a} === #{inspect b}"
 
-global.IN_TESTING_ENVIRONMENT = yes
 global.FIXTURES_DIR = path.join __dirname, 'fixtures'
 
 sfs = fs.scoped FIXTURES_DIR
