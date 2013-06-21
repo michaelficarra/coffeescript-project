@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "description": "Project description",
   "homepage": "https://github.com/github-username/project-name",
-  "keywords": [
-  ],
+  "keywords": [],
   "author": {
     "name": "Your Name",
     "email": "your@email"
@@ -23,8 +22,7 @@
     "lib": "lib",
     "test": "test"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "coffee-script-redux": "2.0.0-beta5",
     "commonjs-everywhere": "0.7.x",
