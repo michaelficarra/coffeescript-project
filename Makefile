@@ -43,7 +43,7 @@ release: build test
 	node -e '\
 		var j = require("./package.json");\
 		j.version = "$(NEXT_VERSION)";\
-		var s = JSON.stringify(j, null, 2);\
+		var s = JSON.stringify(j, null, 2) + "\n";\
 		require("fs").writeFileSync("./package.json", s);'
 	git commit package.json -m 'Version $(NEXT_VERSION)'
 	git tag -a "v$(NEXT_VERSION)" -m "Version $(NEXT_VERSION)"
