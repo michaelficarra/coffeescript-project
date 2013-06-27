@@ -6,9 +6,9 @@ LIBDIR = lib
 TESTDIR = test
 DISTDIR = dist
 
-SRC = $(shell find "$(SRCDIR)" -name "*.coffee" -type f | sort)
+SRC = $(wildcard $(SRCDIR)/*.coffee | sort)
 LIB = $(SRC:$(SRCDIR)/%.coffee=$(LIBDIR)/%.js)
-TEST = $(shell find "$(TESTDIR)" -name "*.coffee" -type f | sort)
+TEST = $(wildcard $(TESTDIR)/*.coffee | sort)
 
 COFFEE=node_modules/.bin/coffee --js
 MOCHA=node_modules/.bin/mocha --compilers coffee:coffee-script-redux/register -r coffee-script-redux/register -r test-setup.coffee -u tdd -R dot
