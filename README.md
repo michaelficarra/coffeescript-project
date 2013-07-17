@@ -16,7 +16,7 @@ Project Description
 
 ### Module Interface
 
-#### `exprtedFunction(args)` → Return Value
+#### `exportedFunction(args)` → Return Value
 Description
 
 ## Examples
