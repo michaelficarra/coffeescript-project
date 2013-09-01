@@ -24,11 +24,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "coffee-script-redux": "2.0.0-beta6",
-    "commonjs-everywhere": "0.7.x",
-    "mocha": "~1.8.1",
-    "scopedfs": "0.1.x",
-    "semver": "~1.1.4"
+    "coffee-script-redux": "2.0.0-beta7",
+    "commonjs-everywhere": "0.9.x",
+    "mocha": "~1.12.1",
+    "scopedfs": "~0.1.0",
+    "semver": "~2.1.0"
   },
   "scripts": {
     "test": "make test"
