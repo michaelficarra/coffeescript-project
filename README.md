@@ -4,7 +4,7 @@ Project Description
 
 ## Install
 
-    npm install -g project-name
+    npm install --save project-name
 
 ## Usage
 
