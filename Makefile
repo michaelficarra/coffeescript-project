@@ -27,7 +27,7 @@ $(DISTDIR)/bundle.js: $(LIB)
 	@mkdir -p "$(@D)"
 	$(CJSIFY) -x ProjectName $(shell node -pe 'require("./package.json").main') >"$@"
 
-.PHONY: phony-dep release test loc clean
+.PHONY: phony-dep all build release release-patch release-minor release-major test loc clean
 phony-dep:
 
 VERSION = $(shell node -pe 'require("./package.json").version')
