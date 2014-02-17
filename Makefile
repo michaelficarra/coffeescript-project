@@ -13,6 +13,7 @@ TEST = $(shell find "$(TESTDIR)" -name "*.coffee" -type f | sort)
 COFFEE=node_modules/.bin/coffee --js
 MOCHA=node_modules/.bin/mocha --compilers coffee:coffee-script-redux/register -r test-setup.coffee -u tdd -R dot
 CJSIFY=node_modules/.bin/cjsify --minify
+SEMVER=node_modules/.bin/semver
 
 all: build test
 build: $(LIB)
@@ -30,9 +31,9 @@ $(DISTDIR)/bundle.js: $(LIB)
 phony-dep:
 
 VERSION = $(shell node -pe 'require("./package.json").version')
-release-patch: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "patch")')
-release-minor: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "minor")')
-release-major: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "major")')
+release-patch: NEXT_VERSION = $(shell $(SEMVER) -i patch $(VERSION))
+release-minor: NEXT_VERSION = $(shell $(SEMVER) -i minor $(VERSION))
+release-major: NEXT_VERSION = $(shell $(SEMVER) -i major $(VERSION))
 release-patch: release
 release-minor: release
 release-major: release
