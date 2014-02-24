@@ -27,18 +27,15 @@ $(DISTDIR)/bundle.js: $(LIB)
 	@mkdir -p "$(@D)"
 	$(CJSIFY) -x ProjectName $(shell node -pe 'require("./package.json").main') >"$@"
 
-.PHONY: phony-dep all build release release-patch release-minor release-major test loc clean
+.PHONY: phony-dep all build release-patch release-minor release-major test loc clean
 phony-dep:
 
 VERSION = $(shell node -pe 'require("./package.json").version')
 release-patch: NEXT_VERSION = $(shell $(SEMVER) -i patch $(VERSION))
 release-minor: NEXT_VERSION = $(shell $(SEMVER) -i minor $(VERSION))
 release-major: NEXT_VERSION = $(shell $(SEMVER) -i major $(VERSION))
-release-patch: release
-release-minor: release
-release-major: release
 
-release: build test
+release-patch release-minor release-major: build test
 	@printf "Current version is $(VERSION). This will publish version $(NEXT_VERSION). Press [enter] to continue." >&2
 	@read nothing
 	node -e "\
